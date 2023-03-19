@@ -34,7 +34,7 @@ app.post("/",(req,res)=>{
     const url = "https://us21.api.mailchimp.com/3.0/lists/49ce2ffc29";
     const options = {
         method:"POST",
-        auth:"anish:da33c23f91c73b575800b5400bb7a009-us21"
+        auth:"anish:0901f782c0485ade7ee80a2123978ae3-us21"
     }
     
     
@@ -43,9 +43,11 @@ app.post("/",(req,res)=>{
             res.send("Succesfully submitted.");
         }
         else{
+            console.log(response.statusCode);
             res.send("Failure try again.");
         }
         response.on("data",(data)=>{
+            console.log(JSON.parse(data));
         });
     });
     request.write(jsonData);
