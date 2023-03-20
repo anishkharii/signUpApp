@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 //const request = require("request");
 const https = require("https");
-
+const fs = require("fs");
 const app = express();
 
 app.use(express.static("public"));
@@ -16,7 +16,21 @@ app.post("/",(req,res)=>{
     const fName = req.body.fName;
     const lName = req.body.lName;
     const email = req.body.email;
-    
+    const dataObj = {
+       firstName: fName,
+       lastName: lName,
+       Email:email
+   }
+
+   const JsonData = JSON.stringify(dataObj);
+
+   fs.appendFile("data.js",JsonData,(err)=>{
+      if(err) throw err;
+      console.log("success");
+   });
+
+
+ /*
     var data = {
         members:[
             {
@@ -51,7 +65,7 @@ app.post("/",(req,res)=>{
         });
     });
     request.write(jsonData);
-    request.end();
+    request.end();*/
 });
 
 
